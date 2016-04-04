@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 // Creo el esquema
 var usuarioSchema = mongoose.Schema({
     name: String,
+    email: String,
     pass: String
 });
 
@@ -21,12 +22,26 @@ usuarioSchema.statics.list = function(cb){
     // La ejecutamos
     query.exec(function(err, rows){
         if (err){
-            console.log("Find", rows);
             cb(err);
             return;
         }
-        console.log("Find", rows);
-        // console.log(rows);
+        cb(null, rows);
+    });
+};
+
+usuarioSchema.statics.delete = function(name, cb){
+    // Preparamos la Query sin ejecutarla (No ponemos callback a find)
+    var userName = name.toLowerCase().toString();
+    var query = Usuarios.remove({"name": userName});
+
+    // Añadimos mas parámetros a la query
+
+    // La ejecutamos
+    query.exec(function(err, rows){
+        if (err){
+            cb(err);
+            return;
+        }
         cb(null, rows);
     });
 };
