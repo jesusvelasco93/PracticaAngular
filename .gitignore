@@ -1,0 +1,14 @@
+#FRONT	
+#Dependencias
+Front/bower_components/
+Front/node_modules/
+
+#Distribucion
+Front/dist/
+
+#BACK
+#Dependencias
+back/node_modules/
+
+#Base de datos
+back/BaseDatos/data/db/
