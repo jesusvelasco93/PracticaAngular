@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="goldencrew" ng-controller="AppController">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title ng-bind-html="model.title">MovieDB</title>
+    <link rel="stylesheet" type="text/css" href="dist/style.css">
+</head>
+<!-- style="background-color:rgb(168, 168, 168)" -->
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div ng-view></div>
+            </div>
+        </div>
+    </div>
+    <script src="dist/app.js"></script>
+</body>
+
+</html>

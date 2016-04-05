@@ -3,35 +3,36 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Anuncio = mongoose.model('Anuncios');
+var Article = mongoose.model('Articulos');
 
-// Get anuncios listing
+// Get Articles listing
 router.get('/', function(req, res) {
 
-    title = req.header.title || "";
+    // NO FUNCIONA BIEN LA DIFERENCIACION
+    var title = req.header.title || "";
     if (title == "") {
         // Llamamos a la busqueda con estos parametros y se lo devolvemos o renderizamos a la vista
-        Anuncio.list(function(err, articles) {
+        Article.list(function(err, articles) {
 
             if (err) {
-                res.json({ anuncios: "", err: err });
+                res.json({ articles: "", err: err });
                 return;
             }
 
-            // res.json({ result: true, anuncios: rows });
-            res.json({ anuncios: articles, err: "" });
+            // res.json({ result: true, Articles: rows });
+            res.json({ articles: articles, err: "" });
         });
     }
     else {
-        Anuncio.item(title, function(err, article) {
+        Article.item(title, function(err, article) {
 
             if (err) {
-                res.json({ anuncio: "", err: err });
+                res.json({ article: "", err: err });
                 return;
             }
 
-            // res.json({ result: true, anuncios: rows });
-            res.json({ anuncio: artcicle, err: "" });
+            // res.json({ result: true, Articles: rows });
+            res.json({ article: artcicle, err: "" });
         });
     }
 });

@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 // MODELOS
-//require('./models/articulos-model');
+require('./models/articulos-model');
 require('./models/usuario-model');
 
 // RUTAS DE WEB

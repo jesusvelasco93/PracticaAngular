@@ -17,10 +17,10 @@ module.exports = function (grunt) {
                     'bower_components/angular/angular.js',
                     'bower_components/angular-route/angular-route.js',
                     'bower_components/angular-sanitize/angular-sanitize.js',
-                    'scripts/**/*.js',
-                    'scripts/*.js'
+                    'public/scripts/**/*.js',
+                    'public/scripts/*.js'
                 ],
-                dest: 'dist/app.js'
+                dest: 'public/dist/app.js'
             }
         },
 
@@ -30,7 +30,7 @@ module.exports = function (grunt) {
             },
             built: {
                 files: {
-                    'dist/app.min.js': ['dist/app.js']
+                    'public/dist/app.min.js': ['public/dist/app.js']
                 }
             }
         },
@@ -38,14 +38,14 @@ module.exports = function (grunt) {
         less: {
             build: {
                 files: {
-                    "dist/style.css": "bower_components/bootstrap/less/bootstrap.less",
+                    "public/dist/style.css": "bower_components/bootstrap/less/bootstrap.less",
                 }
             }
         },
 
         watch: {
             js: {
-                files: ['scripts/**/*.js', 'scripts/*.js'],
+                files: ['public/scripts/**/*.js', 'public/scripts/*.js'],
                 tasks: ['concat']
             }
         }

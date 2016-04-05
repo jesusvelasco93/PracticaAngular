@@ -38,7 +38,7 @@ articuloSchema.statics.list = function(cb){
     });
 };
 
-anuncioSchema.statics.item = function(title, cb){
+articuloSchema.statics.item = function(title, cb){
 
     // Preparamos la Query sin ejecutarla (No ponemos callback a find)
     var query = Articulo.find({"title": title});

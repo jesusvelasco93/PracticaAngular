@@ -1,14 +1,11 @@
-#FRONT	
-#Dependencias
-Front/bower_components/
-Front/node_modules/
 
 #Distribucion
-Front/dist/
+back/public/dist/
 
-#BACK
 #Dependencias
+#NodeBower
 back/node_modules/
+back/bower_components/
 
 #Base de datos
 back/BaseDatos/data/db/
