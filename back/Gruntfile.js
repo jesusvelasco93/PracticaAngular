@@ -21,6 +21,20 @@ module.exports = function (grunt) {
                     'public/scripts/*.js'
                 ],
                 dest: 'public/dist/app.js'
+            },
+            style: {
+                options: {
+                    separator: '\n',
+                    process: false,
+                    stripBanners: {
+                        block: true
+                    }
+                },
+                src: [
+                    'public/dist/styles/golden.css',
+                    'public/dist/styles/style.css'
+                ],
+                dest: 'public/dist/style.css'
             }
         },
 
@@ -38,7 +52,7 @@ module.exports = function (grunt) {
         less: {
             build: {
                 files: {
-                    "public/dist/style.css": "bower_components/bootstrap/less/bootstrap.less",
+                    "public/dist/styles/style.css": "bower_components/bootstrap/less/bootstrap.less",
                 }
             }
         },
