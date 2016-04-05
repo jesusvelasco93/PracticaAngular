@@ -25,14 +25,13 @@ usuarioSchema.statics.list = function(cb){
             cb(err);
             return;
         }
-/*        var users = {};
+        var users = [];
+
         for (var i in rows){
-            console.log(i, rows[i].name);
-            users += {
-                [i]: rows[i].name
-            };
-        }*/
-        console.log(users);
+            console.log(rows[i].name);
+            users.push({ [parseInt(i)+1]: rows[i].name });
+        }
+
         cb(null, users);
     });
 };
