@@ -6,6 +6,19 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Usuario = mongoose.model('Usuarios');
 
+router.get('/all', function(req, res) {
+
+    Usuario.list(function(err, users) {
+
+        if (err) {
+            res.json({ err: err });
+            return;
+        }
+        // res.json({ result: true, Articles: rows });
+        res.json({ Users: users });
+    });
+});
+
 router.post('/', function(req, res) {
     var userName = req.body.name.toLowerCase() || "";
     var userPass = sha(req.body.pass) || "";
@@ -13,19 +26,19 @@ router.post('/', function(req, res) {
         Usuario.findOne({ name: userName, pass: userPass }, function(err, user) {
             console.log(user);
             if (err) {
-                res.json({ usuario: "", err: err });
+                res.json({ err: err });
                 return;
             }
             if (user != null){
-                res.json({ usuario: user.name, err: "" });
+                res.json({ usuario: user.name });
             }
             else{
-                res.json({ usuario: "", err: "Combinacion de usuario y contraseña no coinciden" });
+                res.json({err: "Combinacion de usuario y contraseña no coinciden" });
             }
         });
     }
     else{
-        res.json({ usuario: "", err: "Campos vacios"})
+        res.json({err: "Campos vacios" })
     }
 });
 
@@ -45,7 +58,6 @@ router.post('/new', function(req, res) {
             console.log(row);
             // Si no encontramos..
             if (!row) {
-                console.log(row, !row);
 
                 //Buscamos algun usuario con el email que nos han pasado
                 Usuario.findOne({ email: req.body.email }, function(err, rowEmail) {

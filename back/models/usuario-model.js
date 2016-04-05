@@ -25,7 +25,15 @@ usuarioSchema.statics.list = function(cb){
             cb(err);
             return;
         }
-        cb(null, rows);
+/*        var users = {};
+        for (var i in rows){
+            console.log(i, rows[i].name);
+            users += {
+                [i]: rows[i].name
+            };
+        }*/
+        console.log(users);
+        cb(null, users);
     });
 };
 

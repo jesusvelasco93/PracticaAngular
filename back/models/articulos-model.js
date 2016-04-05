@@ -9,19 +9,30 @@ var mongoose = require('mongoose');
 // Creo el esquema
 var articuloSchema = mongoose.Schema({
     title: String,
+    date_created: Date,
     url_video: String,
     url_imagen: String,
     overview: String,
-    rating: Number,
 });
 
-articuloSchema.statics.list = function(cb){
+articuloSchema.statics.list = function(parametros, cb){
 
+    // Creamos un objeto para añadir los parametros a la busqueda
+    var criteria = {};
+
+    // Añadimos los parametros que nos han mandado
+    // Parametro title
+    if (parametros.title !== ""){
+        criteria = {
+            title: parametros.title
+        };
+    }
     // Preparamos la Query sin ejecutarla (No ponemos callback a find)
     // Hacemos la busqueda con los parametros finales
-    var query = Articulo.find({});
+    var query = Articulo.find(criteria);
 
     // Añadimos mas parámetros a la query
+
 
     // La ejecutamos
     query.exec(function(err, articles) {
