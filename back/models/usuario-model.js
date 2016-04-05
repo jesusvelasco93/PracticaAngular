@@ -28,7 +28,6 @@ usuarioSchema.statics.list = function(cb){
         var users = [];
 
         for (var i in rows){
-            console.log(rows[i].name);
             users.push({ [parseInt(i)+1]: rows[i].name });
         }
 

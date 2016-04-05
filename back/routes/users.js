@@ -24,7 +24,6 @@ router.post('/', function(req, res) {
     var userPass = sha(req.body.pass) || "";
     if (userPass !== "" && userName !== "") {
         Usuario.findOne({ name: userName, pass: userPass }, function(err, user) {
-            console.log(user);
             if (err) {
                 res.json({ err: err });
                 return;
@@ -43,7 +42,6 @@ router.post('/', function(req, res) {
 });
 
 router.post('/new', function(req, res) {
-    console.log(!req.body.name == false, !req.body.pass == false, !req.body.email == false);
     // Comprobamos que los campos no esten vacios
     if (!req.body.name == false && !req.body.pass == false && !req.body.email == false) {
 
@@ -55,7 +53,6 @@ router.post('/new', function(req, res) {
                 res.json({ result: false, err: err });
                 return;
             }
-            console.log(row);
             // Si no encontramos..
             if (!row) {
 

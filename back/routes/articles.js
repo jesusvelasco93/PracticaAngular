@@ -35,6 +35,7 @@ router.post('/', function(req, res) {
         date_created: new Date()
     };
 
+    // Verificamos que no hay campos vacios
     if (art.title !== '' && art.overview !== '') {
         //Comprobamos que no haya ninguno repetido
         Article.findOne({ title: new RegExp('^' + art.title + '$', 'i') }, function(err, row) {
@@ -44,11 +45,6 @@ router.post('/', function(req, res) {
 
                 // Instaciamos objeto en memoria
                 var article = new Article(art);
-
-                // Verificamos que no hay campos vacios
-
-                console.log(article.url_video, article.url_imagen);
-                console.log(article.date_created);
 
                 // Lo guardamos en la Base de Datos
                 article.save(function(err, newRow) {
@@ -64,7 +60,6 @@ router.post('/', function(req, res) {
             }
         });
     } else {
-        console.log(art.title, art.overview);
         res.json({ result: false, err: 'Campos Vacios' });
     }
 });
@@ -76,6 +71,8 @@ router.put('/', function(req, res){
         url_imagen: req.body.url_imagen || '',
         overview: req.body.overview || '',
     };
+
+    // Verificamos que no hay campos vacios
     if (art.title !== '' && art.overview !== '') {
 
         Article.update({title: req.query.title}, { $set: art}, function(err, data){
@@ -92,6 +89,7 @@ router.put('/', function(req, res){
 });
 
 router.delete('/', function(req, res) {
+
     Article.remove({"title": req.body.title}, function(err, check) {
         if (err) {
             res.json({err: err });

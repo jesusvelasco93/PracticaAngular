@@ -1,9 +1,9 @@
 angular.module("goldencrew").controller("AppController",
-    ["$scope", "$location", function ($scope, $location){
+    ["$scope", "$location", "paths", function ($scope, $location, paths){
 
         // Model init
         $scope.model = {
-            title: "Funciona"
+            title: "Golden Crew Parkour"
         };
     }]
 );
