@@ -1,5 +1,5 @@
 angular.module("goldencrew").service("APIClientArticles", 
-    ["$http", "$q", "apiPaths", function ($http, $q, apiPaths) {
+    ["$http", "$q", "LogUser", "apiPaths", function ($http, $q, LogUser, apiPaths) {
 
         this.apiRequest = function(url){
 
@@ -29,7 +29,8 @@ angular.module("goldencrew").service("APIClientArticles",
 
         this.createArticle = function (article) {
             var deferred = $q.defer();
-            //movie.owner = LogUser.getLogin();
+            article.user_created = LogUser.getLogin();
+            console.log(article.user_created);
             $http.post(apiPaths.articles, article).then(
 
                 function (response) {

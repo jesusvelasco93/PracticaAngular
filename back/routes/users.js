@@ -32,12 +32,12 @@ router.post('/', function(req, res) {
                 res.json({ usuario: user.name });
             }
             else{
-                res.json({ err: "Combinacion de usuario y contraseña no coinciden" });
+                res.json({ err: "Username and password dont match." });
             }
         });
     }
     else{
-        res.json({err: "Campos vacios" })
+        res.json({err: "Empty fields" });
     }
 });
 

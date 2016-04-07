@@ -41,7 +41,8 @@ angular.module("goldencrew").controller("MenuController",
                 }
                 else{
                     $location.url(paths.login);
-                    $scope.$emit("loginError", data.err);
+                    console.log("emit in menu");
+                    $scope.$emit("loginErrorEmit", data.err);
                 }
             },
 
@@ -67,10 +68,10 @@ angular.module("goldencrew").controller("MenuController",
         $scope.model.selectedItem = $location.path() || "";
     };
 
-    $scope.$on("$outTimeLogin", function(evt) {
-        console.log("BROADCAAAAST!")
-        $scope.logout();
-    });
+    // $scope.$on("$outTimeLogin", function(evt) {
+    //     console.log("BROADCAAAAST!")
+    //     $scope.logout();
+    // });
 
     $scope.$on("$locationChangeSuccess", function(evt, currentRoute) {
        $scope.model.selectedItem = $location.path() || ""; 

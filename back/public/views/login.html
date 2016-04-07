@@ -1,1 +1,32 @@
-<h1>LOGIN</h1>
+<div ng-controller="LoginController">
+    <div class ="alert alert-danger" ng-show="errorMessage" ng-bind-html="errorMessage"></div>
+    <form name="loginForm" class="form-horizontal" ng-submit="login()" novalidate>
+        <fieldset id="login">
+            <legend>Login</legend>
+            <div class="form-group">
+                <label for="username" class="col-md-2 control-label">Username</label>
+                <div class="col-md-10">
+                    <input type="text" ng-model="model.username" name="username" class="form-control" required placeholder="Name of the user">
+                    <div class="alert alert-warning" ng-show="loginForm.username.$dirty && loginForm.username.$error.required">
+                        <strong>The username is required!</strong> You must introduce a username.
+                    </div>
+                    <div class="alert alert-danger" ng-show="haveError() && loginForm.username.$pristine">
+                        <strong>The username is busy!</strong> Please introduce other username.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="userpass" class="col-md-2 control-label">Password</label>                  
+                <div class="col-md-10">
+                    <input type="password" name="userpass" ng-model="model.userpass" class="form-control" required placeholder="Password asociated">
+                    <div class="alert alert-warning" ng-show="loginForm.userpass.$dirty && loginForm.userpass.$error.required">
+                        <strong>The password is required!</strong> You must introduce a password.
+                    </div>
+                </div>
+            </div>
+            {{loginForm.userpass}}{{loginForm.username}}
+            <button class="btn btn-primary pull-right" type="submit" ng-disabled="!(loginForm.username.$valid && loginForm.userpass.$valid)">Login</button>
+        </fieldset>
+    </form>
+    <br>
+</div>

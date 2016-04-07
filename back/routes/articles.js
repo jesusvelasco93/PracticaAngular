@@ -9,7 +9,10 @@ var Article = mongoose.model('Articulos');
 router.get('/', function(req, res) {
 
     var parametros = {
-        id: req.query.id || ''
+        id: req.query.id || '',
+        sort: {
+            'date_created':-1
+        }
     };
     // Llamamos a la busqueda con estos parametros y se lo devolvemos o renderizamos a la vista
     Article.list(parametros, function(err, articles) {
@@ -33,6 +36,7 @@ router.post('/', function(req, res) {
         url_video: req.body.url_video || '',
         url_imagen: req.body.url_imagen || '',
         overview: req.body.overview || '',
+        user_created: req.body.user_created || '',
         date_created: new Date()
     };
 

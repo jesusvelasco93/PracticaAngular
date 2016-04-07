@@ -1,5 +1,5 @@
 <div ng-controller="ArticleNewController">
-
+    <div class ="alert alert-success" ng-show="successMessage" ng-bind-html="successMessage"></div>
     <form name="newArticleForm" class="form-horizontal" ng-submit="saveArticle()" novalidate>
         <fieldset id="newArticle">
             <legend>New Article</legend>

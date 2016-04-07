@@ -12,13 +12,14 @@ angular.module("goldencrew").controller("ArticleNewController", ["$scope", "$loc
                 if ($scope.err === "") {
                     $scope.model = {};
                     $scope.newArticleForm.$setPristine();
-                    $scope.successMessage = "Movie sved! <a href=\"#articles/?id=" + article.id + "\">View new movie detail</a>";
+                    $scope.message = "Article saved! Go to Articles.";
+                    $scope.successMessage = "Article saved! <a href=#/\"" + paths.articles + "\">Go to Articles.</a>";
                 }
                 else{
                     $scope.newArticleForm.title.$setPristine();
-                    $scope.successMessage = "A error happend. " + $scope.err + " .Please select other title";
+                    $scope.message = "An error happend. " + $scope.err;
                 }
-                alert($scope.successMessage);
+                alert($scope.message);
             },
             function(error) {
                 console.log("ERROR AL GUARDAR PELICULA", error);
@@ -26,19 +27,6 @@ angular.module("goldencrew").controller("ArticleNewController", ["$scope", "$loc
         )
     }
 
-    // $scope.editArticle = function() {
-    //     APIClient.createMovie($scope.model).then(
-    //         function(movie) {
-    //             $scope.successMessage = "Movie sved! <a href=\"#movies/" + movie.id + "\">View new movie detail</a>";
-    //             $scope.model = {};
-    //             $scope.uploadForm.$setPristine();
-    //             console.log("PELICULA GUARDADA", movie);
-    //         },
-    //         function(error) {
-    //             console.log("ERROR AL GUARDAR PELICULA", error);
-    //         }
-    //     )
-    // }
     $scope.haveError = function() {
         if ($scope.err == "") {
             return false;
@@ -49,8 +37,10 @@ angular.module("goldencrew").controller("ArticleNewController", ["$scope", "$loc
     };
 
     $scope.isloged = function() {
+        var err = "Must to be loged";
         if (!LogUser.isLogin()) {
-            $scope.$emit("loginError", "Hay que estar logeado");
+            console.log("emit in new");
+            $scope.$emit("loginErrorEmit", err);
             $location.path(paths.login);
         }
     };

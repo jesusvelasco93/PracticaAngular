@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 // Creo el esquema
 var articuloSchema = mongoose.Schema({
     title: String,
+    user_created: String,
     date_created: Date,
     url_video: String,
     url_imagen: String,
@@ -27,12 +28,14 @@ articuloSchema.statics.list = function(parametros, cb){
             _id: parametros.id
         };
     }
+    
+
     // Preparamos la Query sin ejecutarla (No ponemos callback a find)
     // Hacemos la busqueda con los parametros finales
     var query = Articulo.find(criteria);
 
     // Añadimos mas parámetros a la query
-
+    query.sort(parametros.sort);
 
     // La ejecutamos
     query.exec(function(err, articles) {
