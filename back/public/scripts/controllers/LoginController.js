@@ -4,11 +4,50 @@ angular.module("goldencrew").controller("LoginController",
 
 
     // Scope init
-    $scope.model = {
-        showError: ""
-    };
+    $scope.model = {};
+    $scope.err = "";
 
     // Scope methods
+
+    $scope.register = function() {
+        var userNew = {
+            name: $scope.model.newusername,
+            pass: $scope.model.newuserpass,
+            email: $scope.model.newuseremail
+        }
+        APIClientUsers.setUser(userNew).then(
+            function(userCreated) {
+                $scope.err = userCreated.err || "";
+                if ($scope.err === "") {
+
+                    $scope.model = {};
+                    $scope.model.username = userNew.name;
+
+                    $scope.showError("");
+
+                    $scope.registerForm.$setPristine();
+                    $scope.message = "User created! Go to Login.";
+                }
+                else{
+                    $scope.registerForm.newusername.$setPristine();
+                    $scope.message = "An error happend. " + $scope.err;
+                }
+                alert($scope.message);
+            },
+            function(error) {
+                console.log("ERROR AL CREAR EL USUARIO", error);
+            }
+        );
+    };
+
+    $scope.haveError = function() {
+        if ($scope.err == "") {
+            return false;
+        }
+        else{
+            return true;
+        }
+    };
 
     $scope.login = function() {
         APIClientUsers.getUser($scope.model.username, $scope.model.userpass).then(
@@ -27,6 +66,7 @@ angular.module("goldencrew").controller("LoginController",
                     $scope.model.userpass = "";
                     $scope.loginForm.userpass.$setPristine();
                     $scope.showError(data.err);
+                    $scope.loginForm.$setPristine();
                 }
             },
 
@@ -37,14 +77,22 @@ angular.module("goldencrew").controller("LoginController",
         );
     };
 
-    $scope.showError = function(err){
-        console.log(err);
-        $scope.errorMessage = "An error happend. " + err;
-    };
 
-    $scope.$on("loginError", function(evt, err) {
-        console.log("capturado!");
-        $scope.showError(err);
-    });
+    $scope.showError = function(err){
+        if (err !== ""){
+            console.log(err);
+            $scope.errorMessage = "An error happend. " + err;
+        }
+        else{
+            LogUser.setErrorLogin("");
+            $scope.errorMessage = "";
+        }
+    };
+    $scope.$on("loginError", function (event, err) {
+        $scope.showError(LogUser.getErrorLogin());
+        $scope.loginForm.$setPristine();
+    });            
+
+    $scope.showError(LogUser.getErrorLogin());
     console.log("terminado de cargar");
 }]);

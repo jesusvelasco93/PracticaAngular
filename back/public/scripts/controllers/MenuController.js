@@ -41,7 +41,7 @@ angular.module("goldencrew").controller("MenuController",
                 }
                 else{
                     $location.url(paths.login);
-                    console.log("emit in menu");
+                    LogUser.setErrorLogin(data.err);
                     $scope.$emit("loginErrorEmit", data.err);
                 }
             },
@@ -74,6 +74,7 @@ angular.module("goldencrew").controller("MenuController",
     // });
 
     $scope.$on("$locationChangeSuccess", function(evt, currentRoute) {
+       $scope.model.user = LogUser.getLogin();
        $scope.model.selectedItem = $location.path() || ""; 
         if (LogUser.isLogin() && $location.path() == paths.login) {
             $location.url(paths.home);

@@ -25,7 +25,7 @@ angular.module("goldencrew").controller("ArticleNewController", ["$scope", "$loc
                 console.log("ERROR AL GUARDAR PELICULA", error);
             }
         )
-    }
+    };
 
     $scope.haveError = function() {
         if ($scope.err == "") {
@@ -39,8 +39,7 @@ angular.module("goldencrew").controller("ArticleNewController", ["$scope", "$loc
     $scope.isloged = function() {
         var err = "Must to be loged";
         if (!LogUser.isLogin()) {
-            console.log("emit in new");
-            $scope.$emit("loginErrorEmit", err);
+            LogUser.setErrorLogin(err);
             $location.path(paths.login);
         }
     };

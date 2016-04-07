@@ -1,5 +1,7 @@
 angular.module("goldencrew").service("LogUser", ["$window", function ($window) {
 
+    var errorLogin = "";
+
     this.setLogin = function(user, pass) {
         // Guardar el usuario en memoria del navegador
         window.localStorage.setItem("user", user);
@@ -22,5 +24,12 @@ angular.module("goldencrew").service("LogUser", ["$window", function ($window) {
         } else {
             return true;
         }
-    }
+    };
+    this.setErrorLogin = function(err) {
+        errorLogin = err;
+    };
+    this.getErrorLogin = function() {
+        return errorLogin;
+    };
+
 }]);

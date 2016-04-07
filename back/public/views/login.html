@@ -1,5 +1,5 @@
 <div ng-controller="LoginController">
-    <div class ="alert alert-danger" ng-show="errorMessage" ng-bind-html="errorMessage"></div>
+    <div class ="alert alert-danger" ng-show="errorMessage && loginForm.$pristine" ng-bind-html="errorMessage"></div>
     <form name="loginForm" class="form-horizontal" ng-submit="login()" novalidate>
         <fieldset id="login">
             <legend>Login</legend>
@@ -9,9 +9,6 @@
                     <input type="text" ng-model="model.username" name="username" class="form-control" required placeholder="Name of the user">
                     <div class="alert alert-warning" ng-show="loginForm.username.$dirty && loginForm.username.$error.required">
                         <strong>The username is required!</strong> You must introduce a username.
-                    </div>
-                    <div class="alert alert-danger" ng-show="haveError() && loginForm.username.$pristine">
-                        <strong>The username is busy!</strong> Please introduce other username.
                     </div>
                 </div>
             </div>
@@ -24,8 +21,47 @@
                     </div>
                 </div>
             </div>
-            {{loginForm.userpass}}{{loginForm.username}}
             <button class="btn btn-primary pull-right" type="submit" ng-disabled="!(loginForm.username.$valid && loginForm.userpass.$valid)">Login</button>
+        </fieldset>
+    </form>
+    <form name="registerForm" class="form-horizontal" ng-submit="register()" novalidate>
+        <fieldset id="register">
+            <legend>Register</legend>
+            <div class="form-group">
+                <label for="newusername" class="col-md-2 control-label">Username</label>
+                <div class="col-md-10">
+                    <input type="text" ng-model="model.newusername" name="newusername" class="form-control" required placeholder="Name of the user">
+                    <div class="alert alert-warning" ng-show="registerForm.newusername.$dirty && registerForm.newusername.$error.required">
+                        <strong>The username is required!</strong> You must introduce a username.
+                    </div>
+                    <div class="alert alert-danger" ng-show="haveError() && registerForm.newusername.$pristine">
+                        <strong>The username is busy!</strong> Please introduce other username.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newuserpass" class="col-md-2 control-label">Password</label>                  
+                <div class="col-md-10">
+                    <input type="password" name="newuserpass" ng-model="model.newuserpass" class="form-control" required placeholder="Password..">
+                    <div class="alert alert-warning" ng-show="registerForm.newuserpass.$dirty && registerForm.newuserpass.$error.required">
+                        <strong>The password is required!</strong> You must introduce a password.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newuseremail" class="col-md-2 control-label">Email</label>                  
+                <div class="col-md-10">
+                    <input type="email" name="newuseremail" ng-model="model.newuseremail" class="form-control" required placeholder="Email">
+                    <div class="alert alert-warning" ng-show="registerForm.newuseremail.$dirty && registerForm.newuseremail.$error.required">
+                        <strong>The email is required!</strong> You must introduce a email.
+                    </div>
+                    <div class="alert alert-warning" ng-show="registerForm.newuseremail.$dirty && registerForm.newuseremail.$error.email">
+                        <strong>The email is invalid!</strong> You must introduce a valid email.
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary pull-right" type="submit" ng-disabled="registerForm.$invalid">Register</button>
         </fieldset>
     </form>
     <br>

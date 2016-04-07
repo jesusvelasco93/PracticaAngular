@@ -23,8 +23,8 @@ angular.module("goldencrew").controller("AppController", ["$scope", "$location",
         });
 
         $scope.$on("loginErrorEmit", function (event, err) {
-            console.log("broadcast", err);
             $scope.$broadcast("loginError", err);
         });
+
 
 }]);
