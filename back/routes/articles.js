@@ -9,7 +9,7 @@ var Article = mongoose.model('Articulos');
 router.get('/', function(req, res) {
 
     var parametros = {
-        title: req.query.title || ''
+        id: req.query.id || ''
     };
     // Llamamos a la busqueda con estos parametros y se lo devolvemos o renderizamos a la vista
     Article.list(parametros, function(err, articles) {
@@ -26,6 +26,7 @@ router.get('/', function(req, res) {
 
 
 router.post('/', function(req, res) {
+    console.log(req.body);
 
     var art = {
         title: req.body.title || '',
@@ -56,11 +57,11 @@ router.post('/', function(req, res) {
                 });
 
             } else {
-                res.json({ result: false, err: 'Articulo ya existente' });
+                res.json({ result: false, err: 'Title busy. Please select other.' });
             }
         });
     } else {
-        res.json({ result: false, err: 'Campos Vacios' });
+        res.json({ result: false, err: 'Empty fields.' });
     }
 });
 

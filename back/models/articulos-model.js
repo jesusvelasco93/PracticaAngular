@@ -22,9 +22,9 @@ articuloSchema.statics.list = function(parametros, cb){
 
     // Añadimos los parametros que nos han mandado
     // Parametro title
-    if (parametros.title !== ""){
+    if (parametros.id !== ""){
         criteria = {
-            title: parametros.title
+            _id: parametros.id
         };
     }
     // Preparamos la Query sin ejecutarla (No ponemos callback a find)

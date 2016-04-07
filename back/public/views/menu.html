@@ -1,0 +1,55 @@
+<nav class="navbar navbar-inverse" ng-controller="MenuController">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-7">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#{{::paths.home}}">Golden Crew Parkour</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li ng-class="getClassForItem(paths.articles)">
+                            <a href="#{{::paths.articles}}">Articles</a>
+                        </li>
+                        <li ng-class="getClassForItem(paths.articleNew)">
+                            <a href="#{{::paths.articleNew}}">New</a>
+                        </li>
+                        <li class="visible-xs" ng-show="!isloged()" ng-class="getClassForItem(paths.login)">
+                            <a href="#{{::paths.login}}">Login</a>
+                        </li>
+                        <div class="visible-xs" ng-show="isloged()">
+                            <li>
+                                <span class="span-name-user-mobile">User: {{model.user}}</span>
+                            </li>
+                            <li>
+                                <button type="submit" ng-click="logout()" class="btn btn-default navbar-btn center-block button-logout-mobile">Logout</button>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <div class="hidden-xs">
+                <div class="col-xs-12 col-md-5">
+                    <div ng-show="!isloged()">
+                        <form class="navbar-form navbar-left">
+                            <div class="form-group"><span class="span-menu">Username:</span>
+                                <input type="text" ng-model="model.user" class="form-control" placeholder="Name..">
+                            </div>
+                            <div class="form-group"><span class="span-menu">Password:</span>
+                                <input type="password" ng-model="model.pass" class="form-control" placeholder="Pass..">
+                            </div>
+                            <button type="submit" ng-click="login()" class="btn btn-default">Login</button>
+                        </form>
+                    </div>
+                    <div ng-show="isloged()">
+                        <div class="pull-right">
+                            <span class="span-menu">Username:</span>
+                            <span class="span-name-user">{{model.user}}</span>
+                            <button type="submit" ng-click="logout()" class="btn btn-default navbar-btn">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

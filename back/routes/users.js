@@ -7,7 +7,6 @@ var mongoose = require('mongoose');
 var Usuario = mongoose.model('Usuarios');
 
 router.get('/all', function(req, res) {
-
     Usuario.list(function(err, users) {
 
         if (err) {
@@ -20,6 +19,7 @@ router.get('/all', function(req, res) {
 });
 
 router.post('/', function(req, res) {
+    console.log(req.body);
     var userName = req.body.name.toLowerCase() || "";
     var userPass = sha(req.body.pass) || "";
     if (userPass !== "" && userName !== "") {
@@ -32,7 +32,7 @@ router.post('/', function(req, res) {
                 res.json({ usuario: user.name });
             }
             else{
-                res.json({err: "Combinacion de usuario y contraseña no coinciden" });
+                res.json({ err: "Combinacion de usuario y contraseña no coinciden" });
             }
         });
     }

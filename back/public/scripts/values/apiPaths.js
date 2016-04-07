@@ -3,5 +3,5 @@ angular.module("goldencrew").value("apiPaths", {
    articleDetail: "/api/articles/:title",
    users: "/api/users",
    userNew: "/api/users/new",
-   userAll: "/api/users/api"
+   userAll: "/api/users/all"
 });
