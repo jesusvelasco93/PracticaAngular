@@ -5,6 +5,7 @@ angular.module("goldencrew").controller("ArticlesController",
 
         // Scope init
         $scope.model = {};
+        $scope.paths = paths;
 
         // Scope methods
         APIClientArticles.getArticles().then(

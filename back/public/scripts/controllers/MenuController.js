@@ -33,7 +33,7 @@ angular.module("goldencrew").controller("MenuController",
             function(data) {
                 var logUser = data.usuario || "";
                 if(logUser !== ""){
-                    LogUser.setLogin($scope.model.user, $scope.model.pass);
+                    LogUser.setLogin(data.usuario, data.pass);
                     $scope.model.pass = "";
                     if($location.path() == paths.login){
                         $location.url(paths.home);
@@ -74,12 +74,15 @@ angular.module("goldencrew").controller("MenuController",
     // });
 
     $scope.$on("$locationChangeSuccess", function(evt, currentRoute) {
-       $scope.model.user = LogUser.getLogin();
-       $scope.model.selectedItem = $location.path() || ""; 
+        if (LogUser.isLogin()){
+            $scope.model.user = LogUser.getLogin();
+            $scope.model.pass = "";
+        }
+        $scope.model.selectedItem = $location.path() || ""; 
         if (LogUser.isLogin() && $location.path() == paths.login) {
             $location.url(paths.home);
         }
     });
-
+    // $scope.model.user = LogUser.getLogin();
     $scope.refresh();
 }]);
