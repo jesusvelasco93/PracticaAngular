@@ -46,6 +46,9 @@
                     <div class="alert alert-warning" ng-show="registerForm.newuserpass.$dirty && registerForm.newuserpass.$error.required">
                         <strong>The password is required!</strong> You must introduce a password.
                     </div>
+                    <div class="alert alert-danger" ng-show="minLengthpass() && registerForm.newuserpass.$dirty">
+                        <strong>The password must to have 6 o more caracters.</strong> Please introduce other password.
+                    </div>
                 </div>
             </div>
             <div class="form-group">

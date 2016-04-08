@@ -40,6 +40,21 @@ angular.module("goldencrew").controller("LoginController",
         );
     };
 
+    $scope.minLengthpass = function(){
+        var passlength = $scope.model.newuserpass || "";
+        if (passlength.length >= 6){
+            return false;
+        }
+        else{
+            if (passlength == ""){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    };
+
     $scope.haveError = function() {
         if ($scope.err == "") {
             return false;
