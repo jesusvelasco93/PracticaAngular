@@ -1,6 +1,56 @@
 <div ng-controller="ArticleDetailController">
     <h1>Article detail {{model.title}}</h1>
-    <div>
-        {{model}}
+    <div ng-repeat="item in model.articles" class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-9">
+                    <h2>{{item.title}}</h2>
+                </div>
+                <div class="hidden-xs col-md-3">
+                    <div class="dropdown" ng-show="{{userlog == item.user_created.toLowerCase()}}">
+                        <button class="btn btn-default dropdown-toggle pull-right" type="button" id="actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Actions
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" aria-labelledby="actions">
+                            <li><a href="#">Edit</a></li>
+                            <li><a href="#">Delete</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <img ng-src="{{item.url_imagen}}" width="100%" class="img-responsive" ng-show="{{item.url_imagen != ''}}">
+                    <p ng-show="{{item.url_imagen == ''}}"> "No hay imagen disponible para mostrar en estos momentos." </p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>{{item.overview}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <video class="center-block" controls ng-src="{{item.url_video}}" type="video/mp4"></video>
+                    <!-- <p ng-show="{{item.url_imagen == ''}}"> "No hay imagen disponible para mostrar en estos momentos." </p> -->
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-12 col-md-9">
+                    <p>Created by:{{item.user_created}} in {{item.date_created | date:'yyyy-MM-dd - HH:mm:ss'}}</p>
+                </div>
+                <div class="col-xs-12 col-md-3">
+                    <p class="pull-right"><a class="btn btn-warning btn-lg" href="#{{paths.articles}}/{{item._id}}" role="button">View</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <p><a class="btn btn-warning btn-lg button-all-width center-block" href="#/" role="button">Go back to top!</a></p>
+        </div>
     </div>
 </div>

@@ -1,10 +1,12 @@
 // En el módulo moviedb, defino el controlador
 angular.module("goldencrew").controller("ArticleDetailController", 
-    ["$scope", "$location", "$routeParams", "APIClientArticles", "paths", function ($scope, $location, $routeParams, APIClientArticles, paths){
+    ["$scope", "$location", "$routeParams", "LogUser", "APIClientArticles", "paths", function ($scope, $location, $routeParams, LogUser, APIClientArticles, paths){
 
 
         // Scope init
         $scope.model = {};
+
+        $scope.userlog = LogUser.getLogin().toLowerCase();
         // Scope methods
         APIClientArticles.getArticle($routeParams.id).then(
 

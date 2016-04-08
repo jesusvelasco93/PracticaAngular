@@ -30,7 +30,7 @@ angular.module("goldencrew").service("APIClientUsers", ["$http", "$q", "apiPaths
 
     this.getUser = function(user, pass) {
         var deferred = $q.defer();
-        var usuario = { name: user, pass: pass };
+        var usuario = { name: user || "", pass: pass || "" };
         $http.post(apiPaths.users, usuario).then(
 
             function(response) {

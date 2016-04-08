@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-primary pull-right" type="submit" ng-disabled="!(loginForm.username.$valid && loginForm.userpass.$valid)">Login</button>
+            <button class="btn btn-warning pull-right" type="submit" ng-disabled="!(loginForm.username.$valid && loginForm.userpass.$valid)">Login</button>
         </fieldset>
     </form>
     <form name="registerForm" class="form-horizontal" ng-submit="register()" novalidate>
@@ -64,7 +64,7 @@
                 </div>
             </div>
 
-            <button class="btn btn-primary pull-right" type="submit" ng-disabled="registerForm.$invalid">Register</button>
+            <button class="btn btn-warning pull-right" type="submit" ng-disabled="registerForm.$invalid">Register</button>
         </fieldset>
     </form>
     <br>
