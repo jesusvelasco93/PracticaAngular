@@ -15,7 +15,7 @@ angular.module("goldencrew").service("LogUser", ["$window", function ($window) {
         // // Recuperamos el usuario guardado en el navegador
         // // console.log (window.localStorage.getItem("user"));
         // // return userLog;
-        return window.localStorage.getItem("user");
+        return window.localStorage.getItem("user") || "";
     };
     this.isLogin = function() {
         var user = window.localStorage.getItem("user") || "";

@@ -3,27 +3,47 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title ng-bind-html="model.title">MovieDB</title>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+    <title ng-bind-html="model.title">Golden Crew Parkour</title>
     <link rel="stylesheet" type="text/css" href="dist/style.css">
+
 </head>
 <!-- style="background-color:rgb(168, 168, 168)" -->
-<body class="fondo">
-    <div ng-include="'views/Menu.html'"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <div ng-view></div>
+
+<body class="fondo body-style">
+<!--     <div ng-show="state == 'ideal'"> -->
+        <div ng-include="'views/Menu.html'"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div ng-view></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 center-block">
+                    <div class="booter-center">Todos los derechos reservados. Imagenes y videos pertencientes a Golden Crew Parkour. Version Beta.</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 center-block">
+                    <div class="booter-center">
+                        <a ng-click="navegar(paths.facebook)">
+                            <img ng-src="{{::paths.imgFacebook}}" width="50px">
+                        </a>
+                        <a ng-click="navegar(paths.youtube)">
+                            <img ng-src="{{::paths.imgYoutube}}" width="50px">
+                        </a>
+                        <!--                     <li class="btn btn-warning btn-lg" role="button" on-click="newWindow(paths.facebook)" style="background-image:url(http://localhost:3000/api/articles/images/Background.jpg)"> </li>
+                        <li class="btn btn-warning btn-lg" role="button"on-click="newWindow(paths.youtube)"> </li> -->
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 center-block">
-                <div class="booter-center">Todos los derechos reservados. Imagenes y videos pertencientes a Golden Crew Parkour. Version Beta.<div>
-            </div>
-        </div>
-    </div>
+        <br>
+<!--     </div>
+    <div ng-show="state == 'loading'">
+
+    </div> -->
     <script src="dist/app.js"></script>
 </body>
 

@@ -1,9 +1,12 @@
-angular.module("goldencrew").controller("AppController", ["$scope", "$location", "APIClientUsers", "LogUser", "paths", function($scope, $location, APIClientUsers, LogUser, paths) {
+angular.module("goldencrew").controller("AppController", ["$scope", "$location", "$window", "APIClientUsers", "LogUser", "paths", function($scope, $location, $window, APIClientUsers, LogUser, paths) {
 
     // Model init
     $scope.model = {
-        title: "Golden Crew Parkour"
+        title: "Golden Crew Parkour",
     };
+    $scope.paths = paths;
+    // $scope.state = "loading";
+
     var namePage = "Golden Crew Parkour"
     var controller = this;
         controller.titles = {}
@@ -25,6 +28,23 @@ angular.module("goldencrew").controller("AppController", ["$scope", "$location",
         $scope.$on("loginErrorEmit", function (event, err) {
             $scope.$broadcast("loginError", err);
         });
+        // $scope.$on("endLoading", function (event){
+        //     $scope.state = "ideal";
+        // });
 
+        $scope.navegar = function (dir) {
+            console.log(dir);
+            if (dir !== ""){
+                switch(dir) {
+                case paths.facebook:
+                    $window.open(paths.facebook);
+                    break;
+                case paths.youtube:
+                    $window.open(paths.youtube);
+                    break;
+                }
 
+            }
+            
+        };
 }]);

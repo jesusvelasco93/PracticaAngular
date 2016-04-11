@@ -6,10 +6,12 @@ angular.module("goldencrew").controller("LoginController",
     // Scope init
     $scope.model = {};
     $scope.err = "";
+    $scope.state = "ideal";
 
     // Scope methods
 
     $scope.register = function() {
+        $scope.state = "loading";
         var userNew = {
             name: $scope.model.newusername,
             pass: $scope.model.newuserpass,
@@ -33,9 +35,11 @@ angular.module("goldencrew").controller("LoginController",
                     $scope.message = "An error happend. " + $scope.err;
                 }
                 alert($scope.message);
+                $scope.state = "ideal";
             },
             function(error) {
                 console.log("ERROR AL CREAR EL USUARIO", error);
+                $location.url(paths.error);
             }
         );
     };
@@ -65,10 +69,12 @@ angular.module("goldencrew").controller("LoginController",
     };
 
     $scope.login = function() {
+        $scope.state = "loading";
         APIClientUsers.getUser($scope.model.username, $scope.model.userpass).then(
 
             // respuesta
             function(data) {
+
                 var logUser = data.usuario || "";
                 if(logUser !== ""){
                     LogUser.setLogin($scope.model.username, $scope.model.userpass);
@@ -83,6 +89,7 @@ angular.module("goldencrew").controller("LoginController",
                     $scope.showError(data.err);
                     $scope.loginForm.$setPristine();
                 }
+                $scope.state = "ideal";
             },
 
             // error

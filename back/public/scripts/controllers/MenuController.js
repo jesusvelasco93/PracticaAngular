@@ -1,6 +1,6 @@
 // En el módulo moviedb, defino el controlador
 angular.module("goldencrew").controller("MenuController", 
-    ["$scope", "$location", "APIClientUsers", "LogUser", "paths", function($scope, $location, APIClientUsers, LogUser, paths) {
+    ["$scope", "$location", "$window", "APIClientUsers", "LogUser", "paths", function($scope, $location, $window, APIClientUsers, LogUser, paths) {
 
 
     // Scope init
@@ -37,6 +37,9 @@ angular.module("goldencrew").controller("MenuController",
                     $scope.model.pass = "";
                     if($location.path() == paths.login){
                         $location.url(paths.home);
+                    }
+                    else{
+                        $window.location.reload();
                     }
                 }
                 else{

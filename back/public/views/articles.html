@@ -1,50 +1,76 @@
 <div ng-controller="ArticlesController">
     <h1>Golden Crew Articles</h1>
-    <div ng-repeat="item in model.articles" class="jumbotron">
-        <div class="container">
+    <div class="container">
+        <div ng-show="state == 'loading'">
             <div class="row">
-                <div class="col-xs-12 col-md-9">
-                    <h2>{{item.title}}</h2>
-                </div>
-                <div class="hidden-xs col-md-3">
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle pull-right" type="button" id="actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Actions
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu pull-right" aria-labelledby="actions">
-                            <li><a href="#">View</a></li>
-                            <li ng-show="{{userlog == item.user_created.toLowerCase()}}"><a href="#">Edit</a></li>
-                            <li ng-show="{{userlog == item.user_created.toLowerCase()}}"><a href="#">Delete</a></li>
-                        </ul>
+                <div class="col-xs-12">
+                    <br>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            <span class="sr-only">100% Complete</span>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <img ng-src="{{item.url_imagen}}" width="100%" class="img-responsive" ng-show="{{item.url_imagen != ''}}">
-                    <p ng-show="{{item.url_imagen == ''}}"> "No hay imagen disponible para mostrar en estos momentos." </p>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-xs-12">
-                    <p>{{item.overview}}</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-md-9">
-                    <p>Created by:{{item.user_created}} in {{item.date_created | date:'yyyy-MM-dd - HH:mm:ss'}}</p>
-                </div>
-                <div class="col-xs-12 col-md-3">
-                    <p class="pull-right"><a class="btn btn-warning btn-lg" href="#{{paths.articles}}/{{item._id}}" role="button">View</a></p>
+                    <br>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <p><a class="btn btn-warning btn-lg button-all-width center-block" href="#/" role="button">Go back to top!</a></p>
+        <div ng-show="state == 'blank'">
+            <div class="jumbotron">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2>No hay articulos disponibles que mostrar.</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="state == 'ideal'">
+            <div ng-repeat="item in model.articles" class="jumbotron">
+                <div class="row">
+                    <div class="col-xs-12 col-md-9">
+                        <h2>{{::item.title}}</h2>
+                    </div>
+                    <div class="hidden-xs col-md-3">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle pull-right" type="button" id="actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Actions
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right" aria-labelledby="actions">
+                                <li><a href="#">View</a></li>
+                                <li ng-show="{{::userlog == item.user_created.toLowerCase()}}"><a href="#">Edit</a></li>
+                                <li ng-show="{{::userlog == item.user_created.toLowerCase()}}"><a href="#">Delete</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <img ng-src="{{::item.url_imagen}}" width="100%" class="img-responsive" ng-show="{{item.url_imagen != ''}}">
+                        <p ng-show="{{::item.url_imagen == ''}}"> "No hay imagen disponible para mostrar en estos momentos." </p>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p>{{::item.overview}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-9">
+                        <p class="hidden-xs">Created by: {{::item.user_created}} in {{::item.date_created | date:'yyyy-MM-dd - HH:mm:ss'}}</p>
+                        <span class="visible-xs">Created by: {{::item.user_created}}</span>
+                    </div>
+                    <div class="col-xs-12 visible-xs">
+                        <span>in {{::item.date_created | date:'yyyy-MM-dd - HH:mm:ss'}}</span>
+                    </div>
+                    <div class="col-xs-12 col-md-3">
+                        <p class="pull-right"><a class="btn btn-warning btn-lg" href="#{{::paths.articles}}/{{::item._id}}" role="button">View</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-show="state == 'ideal'">
+                <p><a class="btn btn-warning btn-lg button-all-width center-block" href="#/" role="button">Go back to top!</a></p>
+            </div>
         </div>
     </div>
 </div>

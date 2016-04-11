@@ -1,71 +1,81 @@
 <div ng-controller="LoginController">
-    <div class ="alert alert-danger" ng-show="errorMessage && loginForm.$pristine" ng-bind-html="errorMessage"></div>
-    <form name="loginForm" class="form-horizontal" ng-submit="login()" novalidate>
-        <fieldset id="login">
-            <legend>Login</legend>
-            <div class="form-group">
-                <label for="username" class="col-md-2 control-label">Username</label>
-                <div class="col-md-10">
-                    <input type="text" ng-model="model.username" name="username" class="form-control" required placeholder="Name of the user">
-                    <div class="alert alert-warning" ng-show="loginForm.username.$dirty && loginForm.username.$error.required">
-                        <strong>The username is required!</strong> You must introduce a username.
+    <div ng-show="state == 'loading'">
+        <br>
+        <div class="progress">
+            <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                <span class="sr-only">100% Complete</span>
+            </div>
+        </div>
+        <br>
+    </div>
+    <div ng-show="state == 'ideal'">
+        <div class="alert alert-danger" ng-show="errorMessage && loginForm.$pristine" ng-bind-html="errorMessage"></div>
+        <form name="loginForm" class="form-horizontal" ng-submit="login()" novalidate>
+            <fieldset id="login">
+                <legend>Login</legend>
+                <div class="form-group">
+                    <label for="username" class="col-md-2 control-label">Username</label>
+                    <div class="col-md-10">
+                        <input type="text" ng-model="model.username" name="username" class="form-control" required placeholder="Name of the user">
+                        <div class="alert alert-warning" ng-show="loginForm.username.$dirty && loginForm.username.$error.required">
+                            <strong>The username is required!</strong> You must introduce a username.
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="userpass" class="col-md-2 control-label">Password</label>                  
-                <div class="col-md-10">
-                    <input type="password" name="userpass" ng-model="model.userpass" class="form-control" required placeholder="Password asociated">
-                    <div class="alert alert-warning" ng-show="loginForm.userpass.$dirty && loginForm.userpass.$error.required">
-                        <strong>The password is required!</strong> You must introduce a password.
+                <div class="form-group">
+                    <label for="userpass" class="col-md-2 control-label">Password</label>
+                    <div class="col-md-10">
+                        <input type="password" name="userpass" ng-model="model.userpass" class="form-control" required placeholder="Password asociated">
+                        <div class="alert alert-warning" ng-show="loginForm.userpass.$dirty && loginForm.userpass.$error.required">
+                            <strong>The password is required!</strong> You must introduce a password.
+                        </div>
                     </div>
                 </div>
-            </div>
-            <button class="btn btn-warning pull-right" type="submit" ng-disabled="!(loginForm.username.$valid && loginForm.userpass.$valid)">Login</button>
-        </fieldset>
-    </form>
-    <form name="registerForm" class="form-horizontal" ng-submit="register()" novalidate>
-        <fieldset id="register">
-            <legend>Register</legend>
-            <div class="form-group">
-                <label for="newusername" class="col-md-2 control-label">Username</label>
-                <div class="col-md-10">
-                    <input type="text" ng-model="model.newusername" name="newusername" class="form-control" required placeholder="Name of the user">
-                    <div class="alert alert-warning" ng-show="registerForm.newusername.$dirty && registerForm.newusername.$error.required">
-                        <strong>The username is required!</strong> You must introduce a username.
-                    </div>
-                    <div class="alert alert-danger" ng-show="haveError() && registerForm.newusername.$pristine">
-                        <strong>The username is busy!</strong> Please introduce other username.
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="newuserpass" class="col-md-2 control-label">Password</label>                  
-                <div class="col-md-10">
-                    <input type="password" name="newuserpass" ng-model="model.newuserpass" class="form-control" required placeholder="Password..">
-                    <div class="alert alert-warning" ng-show="registerForm.newuserpass.$dirty && registerForm.newuserpass.$error.required">
-                        <strong>The password is required!</strong> You must introduce a password.
-                    </div>
-                    <div class="alert alert-danger" ng-show="minLengthpass() && registerForm.newuserpass.$dirty">
-                        <strong>The password must to have 6 o more caracters.</strong> Please introduce other password.
+                <button class="btn btn-warning pull-right" type="submit" ng-disabled="!(loginForm.username.$valid && loginForm.userpass.$valid)">Login</button>
+            </fieldset>
+        </form>
+        <form name="registerForm" class="form-horizontal" ng-submit="register()" novalidate>
+            <fieldset id="register">
+                <legend>Register</legend>
+                <div class="form-group">
+                    <label for="newusername" class="col-md-2 control-label">Username</label>
+                    <div class="col-md-10">
+                        <input type="text" ng-model="model.newusername" name="newusername" class="form-control" required placeholder="Name of the user">
+                        <div class="alert alert-warning" ng-show="registerForm.newusername.$dirty && registerForm.newusername.$error.required">
+                            <strong>The username is required!</strong> You must introduce a username.
+                        </div>
+                        <div class="alert alert-danger" ng-show="haveError() && registerForm.newusername.$pristine">
+                            <strong>The username is busy!</strong> Please introduce other username.
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="newuseremail" class="col-md-2 control-label">Email</label>                  
-                <div class="col-md-10">
-                    <input type="email" name="newuseremail" ng-model="model.newuseremail" class="form-control" required placeholder="Email">
-                    <div class="alert alert-warning" ng-show="registerForm.newuseremail.$dirty && registerForm.newuseremail.$error.required">
-                        <strong>The email is required!</strong> You must introduce a email.
-                    </div>
-                    <div class="alert alert-warning" ng-show="registerForm.newuseremail.$dirty && registerForm.newuseremail.$error.email">
-                        <strong>The email is invalid!</strong> You must introduce a valid email.
+                <div class="form-group">
+                    <label for="newuserpass" class="col-md-2 control-label">Password</label>
+                    <div class="col-md-10">
+                        <input type="password" name="newuserpass" ng-model="model.newuserpass" class="form-control" required placeholder="Password..">
+                        <div class="alert alert-warning" ng-show="registerForm.newuserpass.$dirty && registerForm.newuserpass.$error.required">
+                            <strong>The password is required!</strong> You must introduce a password.
+                        </div>
+                        <div class="alert alert-danger" ng-show="minLengthpass() && registerForm.newuserpass.$dirty">
+                            <strong>The password must to have 6 o more caracters.</strong> Please introduce other password.
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <button class="btn btn-warning pull-right" type="submit" ng-disabled="registerForm.$invalid">Register</button>
-        </fieldset>
-    </form>
-    <br>
+                <div class="form-group">
+                    <label for="newuseremail" class="col-md-2 control-label">Email</label>
+                    <div class="col-md-10">
+                        <input type="email" name="newuseremail" ng-model="model.newuseremail" class="form-control" required placeholder="Email">
+                        <div class="alert alert-warning" ng-show="registerForm.newuseremail.$dirty && registerForm.newuseremail.$error.required">
+                            <strong>The email is required!</strong> You must introduce a email.
+                        </div>
+                        <div class="alert alert-warning" ng-show="registerForm.newuseremail.$dirty && registerForm.newuseremail.$error.email">
+                            <strong>The email is invalid!</strong> You must introduce a valid email.
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-warning pull-right" type="submit" ng-disabled="registerForm.$invalid">Register</button>
+            </fieldset>
+        </form>
+        <br>
+    </div>
 </div>
