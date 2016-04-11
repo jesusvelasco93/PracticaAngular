@@ -3,8 +3,9 @@ angular.module("goldencrew").service("LogUser", ["$window", function ($window) {
     var errorLogin = "";
 
     this.setLogin = function(user, pass) {
+        var username = user.charAt(0).toUpperCase() + user.slice(1);
         // Guardar el usuario en memoria del navegador
-        window.localStorage.setItem("user", user);
+        window.localStorage.setItem("user", username);
         window.localStorage.setItem("pass", pass);
     };
     this.getLogin = function() {

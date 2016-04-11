@@ -78,6 +78,7 @@ angular.module("goldencrew").controller("LoginController",
                 var logUser = data.usuario || "";
                 if(logUser !== ""){
                     LogUser.setLogin($scope.model.username, $scope.model.userpass);
+                    $scope.model.username = LogUser.getLogin();
                     $scope.model.userpass = "";
                     if($location.path() == paths.login){
                         $location.url(paths.home);

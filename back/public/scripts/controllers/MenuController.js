@@ -22,18 +22,15 @@ angular.module("goldencrew").controller("MenuController",
             return "";
         }
     };
-    // var a = "crifradodelbueno";
-    // var passa = sha(a);
-    // console.log(passa);
 
     $scope.login = function() {
         APIClientUsers.getUser($scope.model.user, $scope.model.pass).then(
 
-            // película encontrada
             function(data) {
                 var logUser = data.usuario || "";
                 if(logUser !== ""){
                     LogUser.setLogin(data.usuario, data.pass);
+                    $scope.model.user = LogUser.getLogin();
                     $scope.model.pass = "";
                     if($location.path() == paths.login){
                         $location.url(paths.home);
