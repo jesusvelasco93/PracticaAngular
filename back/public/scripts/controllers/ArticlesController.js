@@ -1,6 +1,6 @@
 // En el módulo moviedb, defino el controlador
 angular.module("goldencrew").controller("ArticlesController", 
-    ["$scope", "APIClientArticles", "LogUser", "paths", function ($scope, APIClientArticles, LogUser, paths) {
+    ["$scope", "$location", "APIClientArticles", "LogUser", "paths", function ($scope, $location, APIClientArticles, LogUser, paths) {
 
 
         // Scope init
@@ -31,7 +31,7 @@ angular.module("goldencrew").controller("ArticlesController",
                 // articulos rechazada
                 function(error) {
                     console.log("ERROR", error);
-                    $location.url(paths.error);
+                    $location.path(paths.error);
                 }
 
             );

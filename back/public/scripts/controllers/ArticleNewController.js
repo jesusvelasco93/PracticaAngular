@@ -23,6 +23,7 @@ angular.module("goldencrew").controller("ArticleNewController", ["$scope", "$loc
             },
             function(error) {
                 console.log("ERROR AL GUARDAR PELICULA", error);
+                $location.path(paths.error);
             }
         )
     };

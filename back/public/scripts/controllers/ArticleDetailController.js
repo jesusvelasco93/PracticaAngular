@@ -39,7 +39,7 @@ angular.module("goldencrew").controller("ArticleDetailController",
             // articulo rechazada
             function(error) {
                 console.log("ERROR", error);
-                $location.url(paths.error);
+                $location.path(paths.error);
             }
         );
     };

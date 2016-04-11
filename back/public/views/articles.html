@@ -36,7 +36,7 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu pull-right" aria-labelledby="actions">
-                                <li><a href="#">View</a></li>
+                                <li><a href="#{{::paths.articles}}/{{::item._id}}">View</a></li>
                                 <li ng-show="{{::userlog == item.user_created.toLowerCase()}}"><a href="#">Edit</a></li>
                                 <li ng-show="{{::userlog == item.user_created.toLowerCase()}}"><a href="#">Delete</a></li>
                             </ul>
