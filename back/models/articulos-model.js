@@ -36,6 +36,8 @@ articuloSchema.statics.list = function(parametros, cb){
 
     // Añadimos mas parámetros a la query
     query.sort(parametros.sort);
+    query.skip(parametros.skip*parametros.limit);
+    query.limit(parametros.limit);
 
     // La ejecutamos
     query.exec(function(err, articles) {

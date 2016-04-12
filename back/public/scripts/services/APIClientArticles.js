@@ -23,9 +23,16 @@ angular.module("goldencrew").service("APIClientArticles",
             return deferred.promise;
         };
 
-        this.getArticles = function() {
-            return this.apiRequest(apiPaths.articles);
+        this.getArticles = function(numPag) {
+            var url = apiPaths.articles + "/?pag=" + numPag + "&limit=3";
+            console.log(url);
+            return this.apiRequest(url);
         };
+
+        this.getPages = function() {
+            return this.apiRequest(apiPaths.articlesPages);
+        };
+
         this.getArticle = function(id){
             var url = apiPaths.articles + "/?id=" + id;
             console.log(url);

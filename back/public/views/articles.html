@@ -30,12 +30,12 @@
                         <h2>{{::item.title}}</h2>
                     </div>
                     <div class="hidden-xs col-md-3">
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle pull-right" type="button" id="actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <div class="dropdown pull-right">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 Actions
                                 <span class="caret"></span>
                             </button>
-                            <ul class="dropdown-menu pull-right" aria-labelledby="actions">
+                            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="actions">
                                 <li><a href="#{{::paths.articles}}/{{::item._id}}">View</a></li>
                                 <li ng-show="{{::userlog == item.user_created.toLowerCase()}}"><a href="#">Edit</a></li>
                                 <li ng-show="{{::userlog == item.user_created.toLowerCase()}}"><a href="#">Delete</a></li>
@@ -67,6 +67,23 @@
                         <p class="pull-right"><a class="btn btn-warning btn-lg" href="#{{::paths.articles}}/{{::item._id}}" role="button">View</a></p>
                     </div>
                 </div>
+            </div>
+            <div class="row text-center" ng-show="state == 'ideal'">
+                <nav>
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li ng-repeat="n in pages"><a href="#">{{n}}</a></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
             <div class="row" ng-show="state == 'ideal'">
                 <p><a class="btn btn-warning btn-lg button-all-width center-block" href="#/" role="button">Go back to top!</a></p>

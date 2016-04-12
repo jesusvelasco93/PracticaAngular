@@ -11,8 +11,10 @@ router.get('/', function(req, res) {
     var parametros = {
         id: req.query.id || '',
         sort: {
-            'date_created':-1
-        }
+            'date_created': -1
+        },
+        skip: req.query.pag || 0,
+        limit: req.query.limit || 0
     };
     // Llamamos a la busqueda con estos parametros y se lo devolvemos o renderizamos a la vista
     Article.list(parametros, function(err, articles) {
@@ -24,6 +26,19 @@ router.get('/', function(req, res) {
 
         // res.json({ result: true, Articles: rows });
         res.json({ articles: articles });
+    });
+});
+
+// Get Articles listing
+router.get('/pages', function(req, res) {
+
+    Article.count({}, function(err, c) {
+        if (err) {
+            res.json({ err: err });
+            return;
+        } else {
+            res.json({ numElem: c });
+        }
     });
 });
 
@@ -69,7 +84,7 @@ router.post('/', function(req, res) {
     }
 });
 
-router.put('/', function(req, res){
+router.put('/', function(req, res) {
     var art = {
         title: req.body.title || '',
         url_video: req.body.url_video || '',
@@ -80,24 +95,23 @@ router.put('/', function(req, res){
     // Verificamos que no hay campos vacios
     if (art.title !== '' && art.overview !== '') {
 
-        Article.update({title: req.query.title}, { $set: art}, function(err, data){
+        Article.update({ title: req.query.title }, { $set: art }, function(err, data) {
             if (err) {
                 res.json({ result: false, err: err });
                 return;
             }
-            res.json({ result: true, data: data });  
+            res.json({ result: true, data: data });
         });
-    }
-    else{
-        res.json({ result: false, err: "Campos vacios" });  
+    } else {
+        res.json({ result: false, err: "Campos vacios" });
     }
 });
 
 router.delete('/', function(req, res) {
 
-    Article.remove({"title": req.body.title}, function(err, check) {
+    Article.remove({ "title": req.body.title }, function(err, check) {
         if (err) {
-            res.json({err: err });
+            res.json({ err: err });
             return;
         }
         res.json({ check: check });
