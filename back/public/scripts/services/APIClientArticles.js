@@ -23,8 +23,14 @@ angular.module("goldencrew").service("APIClientArticles",
             return deferred.promise;
         };
 
-        this.getArticles = function(numPag) {
-            var url = apiPaths.articles + "/?pag=" + numPag + "&limit=3";
+        // this.getArticles = function(numPag) {
+        //     var url = apiPaths.articles + "/?pag=" + numPag;
+        //     console.log(url);
+        //     return this.apiRequest(url);
+        // };
+
+        this.getArticles = function(numPag, limit) {
+            var url = apiPaths.articles + "/?pag=" + numPag  + "&limit=" + limit;
             console.log(url);
             return this.apiRequest(url);
         };
@@ -33,7 +39,24 @@ angular.module("goldencrew").service("APIClientArticles",
             return this.apiRequest(apiPaths.articlesPages);
         };
 
-        this.getArticle = function(id){
+        // this.deleteArticle = function (id) {
+        //     var deferred = $q.defer();
+        //     var idUser = { id : id };
+        //     console.log(idUser);
+        //     $http.delete(apiPaths.articles, idUser).then(
+
+        //         function (response) {
+        //             console.log("Data", response.data);
+        //             deferred.resolve(response.data);
+        //         },
+        //         function (response) {
+        //             deferred.reject(response.data);
+        //         }
+        //     );
+        //     return deferred.promise;
+        // };
+
+        this.getArticle = function(id, limit){
             var url = apiPaths.articles + "/?id=" + id;
             console.log(url);
             return this.apiRequest(url);
@@ -42,7 +65,6 @@ angular.module("goldencrew").service("APIClientArticles",
         this.createArticle = function (article) {
             var deferred = $q.defer();
             article.user_created = LogUser.getLogin();
-            console.log(article.user_created);
             $http.post(apiPaths.articles, article).then(
 
                 function (response) {

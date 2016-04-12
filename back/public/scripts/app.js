@@ -1,4 +1,4 @@
-// Defino el módulo "moviedb"
+// Defino el módulo "goldencrew"
 angular.module("goldencrew", ['ngRoute', "ngSanitize"]).config(
     ["$routeProvider", "paths", function ($routeProvider, paths){
 

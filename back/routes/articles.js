@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
             'date_created': -1
         },
         skip: req.query.pag || 0,
-        limit: req.query.limit || 0
+        limit: parseInt(req.query.limit) || 0
     };
     // Llamamos a la busqueda con estos parametros y se lo devolvemos o renderizamos a la vista
     Article.list(parametros, function(err, articles) {
@@ -108,8 +108,8 @@ router.put('/', function(req, res) {
 });
 
 router.delete('/', function(req, res) {
-
-    Article.remove({ "title": req.body.title }, function(err, check) {
+    console.log("En el server", req.body.id);
+    Article.remove({ "_id": req.body.id }, function(err, check) {
         if (err) {
             res.json({ err: err });
             return;

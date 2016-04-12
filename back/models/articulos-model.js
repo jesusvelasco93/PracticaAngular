@@ -33,7 +33,7 @@ articuloSchema.statics.list = function(parametros, cb){
     // Preparamos la Query sin ejecutarla (No ponemos callback a find)
     // Hacemos la busqueda con los parametros finales
     var query = Articulo.find(criteria);
-
+    console.log(parametros.skip, parametros.limit);
     // Añadimos mas parámetros a la query
     query.sort(parametros.sort);
     query.skip(parametros.skip*parametros.limit);
